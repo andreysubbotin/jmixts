@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://taskEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="taskDc"
+                  class="com.company.jmixts.entity.Task">
+            <fetchPlan extends="_local">
+                <property name="priority" fetchPlan="_instance_name"/>
+                <property name="projects" fetchPlan="_instance_name"/>
+                <property name="process" fetchPlan="_instance_name"/>
+                <property name="roles" fetchPlan="_instance_name">
+                    <property name="code"/>
+                </property>
+                <property name="creator" fetchPlan="_instance_name"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="rolesDc" property="roles"/>
+            <collection id="projectsDc" property="projects"/>
+        </instance>
+        <collection id="prioritiesDc"
+                    class="com.company.jmixts.entity.Priority">
+            <fetchPlan extends="_local"/>
+            <loader id="prioritiesDl">
+                <query>
+                    <![CDATA[select e from jmixts_Priority e order by e.orderNo desc]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="tabsheet">
+        <tabSheet id="tabsheet">
+            <tab id="mainTab" margin="true" caption="msg://com.company.jmixts.screen.task/taskEdit.mainTab">
+                <groupBox id="mainBox">
+                    <form id="form" dataContainer="taskDc" colspan="4">
+                        <column width="220px">
+                            <entityPicker id="processField" property="process" editable="false"/>
+                            <textField id="taskNameField" property="taskName" colspan="4" width="100%"/>
+                            <maskedField id="durationField" property="duration" mask="##:##"/>
+                            <dateField id="finishDateTimePlanField" property="finishDateTimePlan"/>
+                            <dateField id="finishDateTimeFactField" property="finishDateTimeFact" editable="false"/>
+                            <entityComboBox id="priorityField" property="priority" optionsContainer="prioritiesDc"/>
+                            <checkBox id="executedField" property="executed"/>
+                        </column>
+                        <column width="220px">
+                            <entityPicker id="creatorField" property="creator" editable="false"/>
+                            <textArea id="fullDescriptionField" property="fullDescription" colspan="3" width="100%"
+                                      rowspan="4" height="100%"/>
+                        </column>
+                        <column width="220px">
+                            <dateField id="createDateField" property="createDate"/>
+                        </column>
+                        <column width="220px">
+                            <textField id="numField" property="num" editable="false"/>
+                        </column>
+                    </form>
+                </groupBox>
+            </tab>
+            <tab id="projectsTab" caption="msg://com.company.jmixts.entity/Task.projects">
+                <groupBox id="projectsBox">
+                    <table id="projectsTable" dataContainer="projectsDc" width="100%" height="450px">
+                        <actions>
+                            <action id="add" type="add"/>
+                            <action id="exclude" type="exclude"/>
+                        </actions>
+                        <columns>
+                            <column id="name"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="projectsTable.add"/>
+                            <button action="projectsTable.exclude"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+            <tab id="rolesTab" caption="msg://com.company.jmixts.entity/Card.roles">
+                <groupBox id="rolesBox">
+                    <table id="rolesTable" dataContainer="rolesDc" width="100%" height="450px">
+                        <actions>
+                            <action id="create" type="create"/>
+                            <action id="edit" type="edit"/>
+                            <action id="remove" type="remove"/>
+                        </actions>
+                        <columns>
+                            <column id="code"/>
+                            <column id="user"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="rolesTable.create"/>
+                            <button action="rolesTable.edit"/>
+                            <button action="rolesTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+        </tabSheet>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

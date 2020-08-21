@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://docEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="docDc"
+                  class="com.company.jmixts.entity.Doc">
+            <fetchPlan extends="_local">
+                <property name="owner" fetchPlan="_instance_name"/>
+                <property name="department" fetchPlan="_instance_name"/>
+                <property name="projects" fetchPlan="_instance_name"/>
+                <property name="organization" fetchPlan="_instance_name"/>
+                <property name="process" fetchPlan="_instance_name"/>
+                <property name="roles" fetchPlan="_instance_name"/>
+                <property name="creator" fetchPlan="_instance_name"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="rolesDc" property="roles"/>
+            <collection id="projectsDc" property="projects"/>
+        </instance>
+        <collection id="departmentsDc"
+                    class="com.company.jmixts.entity.Department">
+            <fetchPlan extends="_local"/>
+            <loader id="departmentsDl">
+                <query>
+                    <![CDATA[select e from jmixts_Department e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="organizationsDc"
+                    class="com.company.jmixts.entity.Organization">
+            <fetchPlan extends="_local"/>
+            <loader id="organizationsDl">
+                <query>
+                    <![CDATA[select e from jmixts_Organization e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="usersDc"
+                    class="com.company.jmixts.entity.User">
+            <fetchPlan extends="_instance_name"/>
+            <loader id="usersDl">
+                <query>
+                    <![CDATA[select e from jmixts_User e order by e.username]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="tabsheet">
+        <tabSheet id="tabsheet">
+            <tab id="mainTab" margin="true" caption="msg://com.company.jmixts.screen.doc/docEdit.mainTab">
+                <groupBox id="mainBox">
+                    <form id="form" dataContainer="docDc" colspan="4">
+                        <column>
+                            <entityPicker id="processField" property="process" editable="false"/>
+                            <comboBox id="docTypeField" property="docType"/>
+                            <entityComboBox id="organizationField" property="organization"
+                                            optionsContainer="organizationsDc" colspan="3"/>
+                            <dateField id="incomeDateField" property="incomeDate"/>
+                            <dateField id="outcomeDateField" property="outcomeDate"/>
+                            <dateField id="regDateField" property="regDate"/>
+                            <textArea id="commentField" property="comment" colspan="4" rows="5" width="100%"/>
+                        </column>
+                        <column>
+                            <textField id="numberField" property="number" editable="false"/>
+                            <entityComboBox id="ownerField" property="owner"
+                                            optionsContainer="usersDc"/>
+                            <textField id="incomeNoField" property="incomeNo"/>
+                            <textField id="outcomeNoField" property="outcomeNo"/>
+                            <checkBox id="registeredField" property="registered"/>
+                        </column>
+                        <column>
+                            <entityPicker id="creatorField" property="creator" editable="false"/>
+                            <entityComboBox id="departmentField" property="department"
+                                            optionsContainer="departmentsDc"/>
+                        </column>
+                        <column>
+                            <dateField id="createDateField" property="createDate" editable="false"/>
+                            <dateField id="dateField" property="date"/>
+                        </column>
+                    </form>
+                </groupBox>
+            </tab>
+            <tab id="projectsTab" caption="msg://com.company.jmixts.entity/Doc.projects">
+                <groupBox id="projectsBox">
+                    <table id="projectsTable" dataContainer="projectsDc" width="100%" height="450px">
+                        <actions>
+                            <action id="add" type="add"/>
+                            <action id="exclude" type="exclude"/>
+                        </actions>
+                        <columns>
+                            <column id="name"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="projectsTable.add"/>
+                            <button action="projectsTable.exclude"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+            <tab id="rolesTab" caption="msg://com.company.jmixts.entity/Card.roles">
+                <groupBox id="rolesBox">
+                    <table id="rolesTable" dataContainer="rolesDc" width="100%" height="450px">
+                        <actions>
+                            <action id="create" type="create"/>
+                            <action id="edit" type="edit"/>
+                            <action id="remove" type="remove"/>
+                        </actions>
+                        <columns>
+                            <column id="code"/>
+                            <column id="user"/>
+                        </columns>
+                        <buttonsPanel>
+                            <button action="rolesTable.create"/>
+                            <button action="rolesTable.edit"/>
+                            <button action="rolesTable.remove"/>
+                        </buttonsPanel>
+                    </table>
+                </groupBox>
+            </tab>
+        </tabSheet>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

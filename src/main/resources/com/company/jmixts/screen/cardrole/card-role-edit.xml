@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://cardRoleEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="cardRoleDc"
+                  class="com.company.jmixts.entity.CardRole">
+            <fetchPlan extends="_local">
+                <property name="user" fetchPlan="_instance_name"/>
+                <property name="card" fetchPlan="_instance_name"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+        <collection id="usersDc"
+                    class="com.company.jmixts.entity.User">
+            <fetchPlan extends="_instance_name"/>
+            <loader id="usersDl">
+                <query>
+                    <![CDATA[select e from jmixts_User e order by e.username]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="cardRoleDc">
+            <column width="350px">
+                <textField id="codeField" property="code"/>
+                <entityComboBox id="userField"
+                                property="user"
+                                optionsContainer="usersDc"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

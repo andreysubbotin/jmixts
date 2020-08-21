@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://processBrowse.caption"
+        focusComponent="processesTable">
+    <data readOnly="true">
+        <collection id="processesDc"
+                    class="com.company.jmixts.entity.Process">
+            <fetchPlan extends="_local"/>
+            <loader id="processesDl">
+                <query>
+                    <![CDATA[select e from jmixts_Process e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <table id="processesTable"
+               width="100%"
+               dataContainer="processesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="processesTable.create"/>
+                <button id="editBtn" action="processesTable.edit"/>
+                <button id="removeBtn" action="processesTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

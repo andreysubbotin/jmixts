@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://projectEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="projectDc"
+                  class="com.company.jmixts.entity.Project">
+            <fetchPlan extends="_local">
+                <property name="organization" fetchPlan="_instance_name"/>
+            </fetchPlan>
+            <loader/>
+        </instance>
+        <collection id="organizationsDc" class="com.company.jmixts.entity.Organization">
+            <fetchPlan extends="_local"/>
+            <loader id="organizationsDl">
+                <query>
+                    <![CDATA[select e from jmixts_Organization e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="projectDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <entityComboBox id="organizationField"
+                                property="organization"
+                                optionsContainer="organizationsDc"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

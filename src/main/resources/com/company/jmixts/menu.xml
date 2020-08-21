@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/ui/menu">
+
+    <menu id="tasks" caption="msg://com.company.jmixts/menu.tasks" insertBefore="security">
+        <item screen="jmixts_Task.browse" caption="msg://com.company.jmixts.screen.task/taskBrowse.caption"/>
+    </menu>
+
+    <menu id="docs" caption="msg://com.company.jmixts/menu.docs" insertBefore="security">
+
+        <item screen="jmixts_Doc.browse" caption="msg://com.company.jmixts.screen.doc/docBrowse.caption"/>
+    </menu>
+
+    <menu id="references" caption="msg://com.company.jmixts/menu.references" insertBefore="security">
+        <item screen="jmixts_Project.browse" caption="msg://com.company.jmixts.screen.project/projectBrowse.caption"/>
+        <item screen="jmixts_Organization.browse"
+              caption="msg://com.company.jmixts.screen.organization/organizationBrowse.caption"/>
+        <item screen="jmixts_Priority.browse"
+              caption="msg://com.company.jmixts.screen.priority/priorityBrowse.caption"/>
+        <item screen="jmixts_Department.browse"
+              caption="msg://com.company.jmixts.screen.department/departmentBrowse.caption"/>
+    </menu>
+
+    <menu id="configuration" caption="msg://com.company.jmixts/menu.configuration" insertBefore="security">
+        <item screen="jmixts_User.browse" caption="msg://com.company.jmixts.screen.user/UserBrowse.caption"/>
+        <item screen="jmixts_Process.browse" caption="msg://com.company.jmixts.screen.process/processBrowse.caption"/>
+    </menu>
+
+</menu-config>

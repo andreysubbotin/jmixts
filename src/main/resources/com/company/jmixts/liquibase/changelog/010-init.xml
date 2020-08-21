@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="jmixts">
+
+        <createTable tableName="JMIXTS_DEPARTMENT">
+            <column name="ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="JMIXTS_USER">
+            <column name="ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USERNAME" type="varchar(255)"/>
+            <column name="FIRST_NAME" type="varchar(255)"/>
+            <column name="LAST_NAME" type="varchar(255)"/>
+            <column name="PASSWORD" type="varchar(255)"/>
+            <column name="EMAIL" type="varchar(255)"/>
+            <column name="ENABLED" type="boolean"/>
+            <column name="DEPARTMENT_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_USER_DEPARTMENT"
+                             references="JMIXTS_DEPARTMENT(ID)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="JMIXTS_PROCESS">
+            <column name="ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="JMIXTS_CARD">
+            <column name="ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DTYPE" type="varchar(255)"/>
+            <column name="PROCESS_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_CARD_PROCESS"
+                             references="JMIXTS_PROCESS(ID)"/>
+            </column>
+            <column name="CREATOR_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_CARD_USER"
+                             references="JMIXTS_USER(ID)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="JMIXTS_CARD_ROLE">
+            <column name="ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CODE" type="varchar(255)"/>
+            <column name="CARD_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_CR_CARD"
+                             references="JMIXTS_CARD(ID)"/>
+            </column>
+            <column name="USER_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_CR_USER"
+                             references="JMIXTS_USER(ID)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="JMIXTS_PRIORITY">
+            <column name="ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(255)"/>
+            <column name="ORDER_NO" type="int"/>
+        </createTable>
+
+        <createTable tableName="JMIXTS_ORGANIZATION">
+            <column name="ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(255)"/>
+            <column name="FULL_NAME" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="JMIXTS_PROJECT">
+            <column name="ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="VERSION" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NAME" type="varchar(255)"/>
+            <column name="ORGANIZATION_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_PROJECT_ORGANIZATION"
+                             references="JMIXTS_ORGANIZATION(ID)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="JMIXTS_TASK">
+            <column name="CARD_ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="FK_JMIXTS_TASK_CARD"
+                             references="JMIXTS_CARD(ID)"/>
+            </column>
+            <column name="NUM" type="varchar(255)"/>
+            <column name="CREATE_DATE" type="datetime"/>
+            <column name="TASK_NAME" type="varchar(255)"/>
+            <column name="FULL_DESCRIPTION" type="varchar(255)"/>
+            <column name="DURATION" type="int"/>
+            <column name="FINISH_DATE_TIME_FACT" type="datetime"/>
+            <column name="FINISH_DATE_TIME_PLAN" type="datetime"/>
+            <column name="PRIORITY_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_TASK_PRIORITY"
+                             references="JMIXTS_PRIORITY(ID)"/>
+            </column>
+            <column name="EXECUTED" type="boolean"/>
+        </createTable>
+
+        <createTable tableName="JMIXTS_TASK_PROJECT_LINK">
+            <column name="CARD_ID" type="uuid">
+                <constraints nullable="false"
+                             foreignKeyName="FK_JMIXTS_PROJECTLINK_CARD"
+                             references="JMIXTS_CARD(ID)"/>
+            </column>
+            <column name="PROJECT_ID" type="uuid">
+                <constraints nullable="false"
+                             foreignKeyName="FK_JMIXTS_PROJECTLINK_PROJECT"
+                             references="JMIXTS_PROJECT(ID)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="JMIXTS_DOC">
+            <column name="CARD_ID" type="uuid">
+                <constraints primaryKey="true" nullable="false"
+                             foreignKeyName="FK_JMIXTS_DOC_CARD"
+                             references="JMIXTS_CARD(ID)"/>
+            </column>
+            <column name="NUMBER_" type="varchar(255)"/>
+            <column name="DATE_" type="datetime"/>
+            <column name="CREATE_DATE" type="datetime"/>
+            <column name="OWNER_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_DOC_USER"
+                             references="JMIXTS_USER(ID)"/>
+            </column>
+            <column name="DEPARTMENT_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_DOC_DEPARTMENT"
+                             references="JMIXTS_DEPARTMENT(ID)"/>
+            </column>
+            <column name="COMMENT_" type="varchar(2000)"/>
+            <column name="DOC_TYPE" type="varchar(255)"/>
+            <column name="INCOME_DATE" type="datetime"/>
+            <column name="INCOME_NO" type="varchar(255)"/>
+            <column name="OUTCOME_DATE" type="datetime"/>
+            <column name="OUTCOME_NO" type="varchar(255)"/>
+            <column name="REGISTERED" type="boolean"/>
+            <column name="REG_DATE" type="datetime"/>
+            <column name="ORGANIZATION_ID" type="uuid">
+                <constraints nullable="true"
+                             foreignKeyName="FK_JMIXTS_DOC_ORGANIZATION"
+                             references="JMIXTS_ORGANIZATION(ID)"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="JMIXTS_DOC_PROJECT_LINK">
+            <column name="CARD_ID" type="uuid">
+                <constraints nullable="false"
+                             foreignKeyName="FK_JMIXTS_DOC_PROJECTLINK_CARD"
+                             references="JMIXTS_CARD(ID)"/>
+            </column>
+            <column name="PROJECT_ID" type="uuid">
+                <constraints nullable="false"
+                             foreignKeyName="FK_JMIXTS_DOC_PROJECTLINK_PROJECT"
+                             references="JMIXTS_PROJECT(ID)"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="2" author="jmixts">
+
+        <insert tableName="JMIXTS_USER">
+            <column name="ID" value="60885987-1b61-4247-94c7-dff348347f93"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="admin"/>
+            <column name="PASSWORD" value="{noop}admin"/>
+            <column name="ENABLED" value="true"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
+            <column name="ID" value="6c9e420a-2b7a-4c42-8654-a9027ee14083"/>
+            <column name="VERSION" value="1"/>
+            <column name="USER_KEY" value="admin"/>
+            <column name="ROLE_CODE" value="system-full-access"/>
+        </insert>
+
+        <insert tableName="JMIXTS_USER">
+            <column name="ID" value="12d1336a-e2be-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="refeditor"/>
+            <column name="PASSWORD" value="{noop}1"/>
+            <column name="ENABLED" value="true"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
+            <column name="ID" value="5ee3807a-e2bc-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USER_KEY" value="refeditor"/>
+            <column name="ROLE_CODE" value="reference-editor"/>
+        </insert>
+
+        <insert tableName="JMIXTS_USER">
+            <column name="ID" value="6defe2a2-e2bc-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="projeditor"/>
+            <column name="PASSWORD" value="{noop}1"/>
+            <column name="ENABLED" value="true"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
+            <column name="ID" value="7404c77a-e2bc-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USER_KEY" value="projeditor"/>
+            <column name="ROLE_CODE" value="project-editor"/>
+        </insert>
+
+        <insert tableName="JMIXTS_USER">
+            <column name="ID" value="912d55d2-e2bd-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="tcreator1"/>
+            <column name="PASSWORD" value="{noop}1"/>
+            <column name="ENABLED" value="true"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
+            <column name="ID" value="bd643a58-e2bd-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USER_KEY" value="tcreator1"/>
+            <column name="ROLE_CODE" value="task-creator"/>
+        </insert>
+
+        <insert tableName="JMIXTS_USER">
+            <column name="ID" value="6d77ae7c-e2e9-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="tcreator2"/>
+            <column name="PASSWORD" value="{noop}1"/>
+            <column name="ENABLED" value="true"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
+            <column name="ID" value="74c22b80-e2e9-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USER_KEY" value="tcreator2"/>
+            <column name="ROLE_CODE" value="task-creator"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
+            <column name="ID" value="8451e25c-e2e9-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USER_KEY" value="tcreator2"/>
+            <column name="ROLE_CODE" value="task-restricted-access"/>
+        </insert>
+
+        <insert tableName="JMIXTS_USER">
+            <column name="ID" value="01da689e-e2d5-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USERNAME" value="texecutor"/>
+            <column name="PASSWORD" value="{noop}1"/>
+            <column name="ENABLED" value="true"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
+            <column name="ID" value="4b431e18-e2d5-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USER_KEY" value="texecutor"/>
+            <column name="ROLE_CODE" value="task-executor"/>
+        </insert>
+
+        <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
+            <column name="ID" value="8dae79bc-e2dc-11ea-87d0-0242ac130003"/>
+            <column name="VERSION" value="1"/>
+            <column name="USER_KEY" value="texecutor"/>
+            <column name="ROLE_CODE" value="task-restricted-access"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

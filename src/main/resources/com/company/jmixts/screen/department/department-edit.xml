@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://departmentEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="departmentDc"
+                  class="com.company.jmixts.entity.Department">
+            <fetchPlan extends="_local"/>
+            <loader/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <form id="form" dataContainer="departmentDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <textField id="versionField" property="version"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

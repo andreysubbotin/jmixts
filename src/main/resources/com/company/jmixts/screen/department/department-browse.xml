@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://departmentBrowse.caption"
+        focusComponent="departmentsTable">
+    <data readOnly="true">
+        <collection id="departmentsDc"
+                    class="com.company.jmixts.entity.Department">
+            <fetchPlan extends="_local"/>
+            <loader id="departmentsDl">
+                <query>
+                    <![CDATA[select e from jmixts_Department e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <table id="departmentsTable"
+               width="100%"
+               dataContainer="departmentsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="departmentsTable.create"/>
+                <button id="editBtn" action="departmentsTable.edit"/>
+                <button id="removeBtn" action="departmentsTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
