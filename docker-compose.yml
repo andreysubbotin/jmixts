@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  app_1:
+    container_name: jmixts_1
+    image: jmixts:0.0.1-SNAPSHOT
+    build: ./
+    ports:
+      - "18080:8080"
+    depends_on:
+      - postgres
+  app_2:
+    container_name: jmixts_2
+    image: jmixts:0.0.1-SNAPSHOT
+    build: ./
+    ports:
+      - "28080:8080"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:12
+    container_name: postgres-jmixts
+    ports:
+      - 127.0.0.1:5432:5432
+    environment:
+      - POSTGRES_USER=cuba
+      - POSTGRES_PASSWORD=cuba
+    volumes:
+      - ./db-data/postgres-12:/var/lib/postgresql
+

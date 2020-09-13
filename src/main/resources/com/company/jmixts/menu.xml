@@ -23,6 +23,7 @@
     <menu id="configuration" caption="msg://com.company.jmixts/menu.configuration" insertBefore="security">
         <item screen="jmixts_User.browse" caption="msg://com.company.jmixts.screen.user/UserBrowse.caption"/>
         <item screen="jmixts_Process.browse" caption="msg://com.company.jmixts.screen.process/processBrowse.caption"/>
+        <item screen="sys_Category.browse"/>
     </menu>
 
 </menu-config>

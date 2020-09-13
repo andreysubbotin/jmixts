@@ -32,8 +32,16 @@ dependencies {
     implementation 'io.jmix.security:jmix-security-ui-starter'
     implementation 'io.jmix.security:jmix-security-data-starter'
     implementation 'io.jmix.rest:jmix-rest-starter'
+    implementation 'io.jmix.dynattr:jmix-dynattr-starter'
+    implementation 'io.jmix.dynattr:jmix-dynattr-ui-starter'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //compile 'com.github.ben-manes.caffeine:caffeine:2.8.5'
+    //compile 'com.github.ben-manes.caffeine:jcache:2.8.5'
+    compile 'com.hazelcast:hazelcast'
+    compile 'com.hazelcast:hazelcast-spring'
+
 
     runtimeOnly 'org.hsqldb:hsqldb'
 
