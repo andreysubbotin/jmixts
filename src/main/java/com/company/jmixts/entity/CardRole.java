@@ -1,6 +1,5 @@
 package com.company.jmixts.entity;
 
-import io.jmix.core.JmixEntity;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 
 import javax.persistence.*;
@@ -8,7 +7,7 @@ import java.util.UUID;
 
 @Table(name = "JMIXTS_CARD_ROLE")
 @Entity(name = "jmixts_CardRole")
-public class CardRole implements JmixEntity {
+public class CardRole {
     private static final long serialVersionUID = -3606204213418358110L;
 
     @JmixGeneratedValue

@@ -1,6 +1,5 @@
 package com.company.jmixts.entity;
 
-import io.jmix.core.JmixEntity;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.Composition;
 
@@ -13,7 +12,7 @@ import java.util.UUID;
 @Entity(name = "jmixts_Card")
 @DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Card implements JmixEntity {
+public class Card {
     private static final long serialVersionUID = -1985137453539462234L;
 
     @JmixGeneratedValue

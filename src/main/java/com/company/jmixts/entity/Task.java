@@ -1,7 +1,5 @@
 package com.company.jmixts.entity;
 
-import io.jmix.core.JmixEntity;
-import io.jmix.core.metamodel.annotation.ModelProperty;
 import io.jmix.core.metamodel.annotation.PropertyDatatype;
 
 import javax.persistence.*;
@@ -12,7 +10,7 @@ import java.util.Set;
 @Table(name = "JMIXTS_TASK")
 @Entity(name = "jmixts_Task")
 @PrimaryKeyJoinColumn(name = "CARD_ID", referencedColumnName = "ID")
-public class Task extends Card implements JmixEntity {
+public class Task extends Card {
     private static final long serialVersionUID = -5738459041323287321L;
 
     @Column(name = "NUM")

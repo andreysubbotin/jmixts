@@ -220,7 +220,7 @@
         <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
             <column name="ID" value="6c9e420a-2b7a-4c42-8654-a9027ee14083"/>
             <column name="VERSION" value="1"/>
-            <column name="USER_KEY" value="admin"/>
+            <column name="USERNAME" value="admin"/>
             <column name="ROLE_CODE" value="system-full-access"/>
         </insert>
 
@@ -235,7 +235,7 @@
         <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
             <column name="ID" value="5ee3807a-e2bc-11ea-87d0-0242ac130003"/>
             <column name="VERSION" value="1"/>
-            <column name="USER_KEY" value="refeditor"/>
+            <column name="USERNAME" value="refeditor"/>
             <column name="ROLE_CODE" value="reference-editor"/>
         </insert>
 
@@ -250,7 +250,7 @@
         <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
             <column name="ID" value="7404c77a-e2bc-11ea-87d0-0242ac130003"/>
             <column name="VERSION" value="1"/>
-            <column name="USER_KEY" value="projeditor"/>
+            <column name="USERNAME" value="projeditor"/>
             <column name="ROLE_CODE" value="project-editor"/>
         </insert>
 
@@ -265,7 +265,7 @@
         <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
             <column name="ID" value="bd643a58-e2bd-11ea-87d0-0242ac130003"/>
             <column name="VERSION" value="1"/>
-            <column name="USER_KEY" value="tcreator1"/>
+            <column name="USERNAME" value="tcreator1"/>
             <column name="ROLE_CODE" value="task-creator"/>
         </insert>
 
@@ -280,14 +280,14 @@
         <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
             <column name="ID" value="74c22b80-e2e9-11ea-87d0-0242ac130003"/>
             <column name="VERSION" value="1"/>
-            <column name="USER_KEY" value="tcreator2"/>
+            <column name="USERNAME" value="tcreator2"/>
             <column name="ROLE_CODE" value="task-creator"/>
         </insert>
 
         <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
             <column name="ID" value="8451e25c-e2e9-11ea-87d0-0242ac130003"/>
             <column name="VERSION" value="1"/>
-            <column name="USER_KEY" value="tcreator2"/>
+            <column name="USERNAME" value="tcreator2"/>
             <column name="ROLE_CODE" value="task-restricted-access"/>
         </insert>
 
@@ -302,14 +302,14 @@
         <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
             <column name="ID" value="4b431e18-e2d5-11ea-87d0-0242ac130003"/>
             <column name="VERSION" value="1"/>
-            <column name="USER_KEY" value="texecutor"/>
+            <column name="USERNAME" value="texecutor"/>
             <column name="ROLE_CODE" value="task-executor"/>
         </insert>
 
         <insert tableName="SEC_ROLE_ASSIGNMENT_ENTITY">
             <column name="ID" value="8dae79bc-e2dc-11ea-87d0-0242ac130003"/>
             <column name="VERSION" value="1"/>
-            <column name="USER_KEY" value="texecutor"/>
+            <column name="USERNAME" value="texecutor"/>
             <column name="ROLE_CODE" value="task-restricted-access"/>
         </insert>
 

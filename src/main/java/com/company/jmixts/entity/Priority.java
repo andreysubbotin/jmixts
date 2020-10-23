@@ -1,16 +1,14 @@
 package com.company.jmixts.entity;
 
-import io.jmix.core.JmixEntity;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
-import io.jmix.core.metamodel.annotation.ModelProperty;
 
 import javax.persistence.*;
 import java.util.UUID;
 
 @Table(name = "JMIXTS_PRIORITY")
 @Entity(name = "jmixts_Priority")
-public class Priority implements JmixEntity {
+public class Priority {
     private static final long serialVersionUID = 3206877484655513421L;
 
     @JmixGeneratedValue

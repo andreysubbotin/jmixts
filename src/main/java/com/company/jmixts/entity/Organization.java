@@ -1,6 +1,5 @@
 package com.company.jmixts.entity;
 
-import io.jmix.core.JmixEntity;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
 
@@ -9,7 +8,7 @@ import java.util.UUID;
 
 @Table(name = "JMIXTS_ORGANIZATION")
 @Entity(name = "jmixts_Organization")
-public class Organization implements JmixEntity {
+public class Organization {
     private static final long serialVersionUID = 8073483246261811914L;
 
     @JmixGeneratedValue

@@ -18,8 +18,7 @@ import io.jmix.security.role.annotation.Role;
 import io.jmix.securityui.role.annotation.MenuPolicy;
 import io.jmix.securityui.role.annotation.ScreenPolicy;
 
-import static io.jmix.security.model.EntityAttributePolicyAction.READ;
-import static io.jmix.security.model.EntityAttributePolicyAction.UPDATE;
+import static io.jmix.security.model.EntityAttributePolicyAction.MODIFY;
 import static io.jmix.security.model.EntityPolicyAction.ALL;
 
 //TODO: all for actions on entity attributes
@@ -35,30 +34,30 @@ public interface ReferenceEditorRole {
     @MenuPolicy(menuIds = "jmixts_Project.browse")
     @ScreenPolicy(screenClasses = {ProjectBrowse.class, ProjectEdit.class})
     @EntityPolicy(entityClass = Project.class, actions = ALL)
-    @EntityAttributePolicy(entityClass = Project.class, attributes = "*", actions = {READ, UPDATE})
+    @EntityAttributePolicy(entityClass = Project.class, attributes = "*", action = MODIFY)
     void project();
 
     @MenuPolicy(menuIds = "jmixts_Organization.browse")
     @ScreenPolicy(screenClasses = {OrganizationBrowse.class, OrganizationEdit.class})
     @EntityPolicy(entityClass = Organization.class, actions = ALL)
-    @EntityAttributePolicy(entityClass = Organization.class, attributes = "*", actions = {READ, UPDATE})
+    @EntityAttributePolicy(entityClass = Organization.class, attributes = "*", action = MODIFY)
     void organization();
 
     @MenuPolicy
     @ScreenPolicy
     @EntityPolicy(actions = ALL)
-    @EntityAttributePolicy(attributes = "*", actions = {READ, UPDATE})
+    @EntityAttributePolicy(attributes = "*", action = MODIFY)
     void organization(Organization organization);
 
     @MenuPolicy(menuIds = "jmixts_Priority.browse")
     @ScreenPolicy(screenClasses = {PriorityBrowse.class, PriorityEdit.class})
     @EntityPolicy(entityClass = Priority.class, actions = ALL)
-    @EntityAttributePolicy(entityClass = Priority.class, attributes = "*", actions = {READ, UPDATE})
+    @EntityAttributePolicy(entityClass = Priority.class, attributes = "*", action = MODIFY)
     void priority();
 
     @MenuPolicy(menuIds = "jmixts_Department.browse")
     @ScreenPolicy(screenClasses = {DepartmentBrowse.class, DepartmentEdit.class})
     @EntityPolicy(entityClass = Department.class, actions = ALL)
-    @EntityAttributePolicy(entityClass = Department.class, attributes = "*", actions = {READ, UPDATE})
+    @EntityAttributePolicy(entityClass = Department.class, attributes = "*", action = MODIFY)
     void department();
 }
